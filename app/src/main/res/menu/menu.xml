@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_quanly"
+            android:title="Quản Lý"
+            android:icon="@drawable/sanpham"></item>
+        <item android:id="@+id/nav_gioithieu"
+            android:title="Giới Thiệu"
+            android:icon="@drawable/gioithieu"></item>
+    </group>
+    <item android:title="Khác">
+        <menu>
+            <item android:id="@+id/nav_caidat"
+                android:title="Cài Đặt"
+                android:icon="@drawable/caidat"></item>
+            <item android:id="@+id/nav_dangxuat"
+                android:title="Đăng Xuất"
+                android:icon="@drawable/dangxuat"></item>
+        </menu>
+    </item>
+</menu>

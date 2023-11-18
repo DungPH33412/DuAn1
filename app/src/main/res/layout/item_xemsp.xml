@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    android:gravity="center"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:text="Xem sản phẩm"
+        android:textColor="#D10606"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:background="@drawable/nike"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên sản phẩm: "
+        android:textAllCaps="true"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_gravity="left"
+        android:layout_margin="7dp"
+        />
+    <EditText
+        android:id="@+id/edtname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_edit"
+        android:hint="Tên sản phẩm"
+        android:textSize="22sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đơn giá: "
+        android:textAllCaps="true"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_gravity="left"
+        android:layout_margin="7dp"
+        />
+    <EditText
+        android:id="@+id/edtdongia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Đơn giá"
+        android:background="@drawable/custom_edit"
+        android:textSize="22sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Màu sắc: "
+        android:textAllCaps="true"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_gravity="left"
+        android:layout_margin="7dp"
+        />
+    <EditText
+        android:id="@+id/edtmausac"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_edit"
+        android:hint="Màu trắng"
+        android:textSize="22sp" />
+
+
+
+    <Button
+        android:id="@+id/btnback1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="Back"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_button"
+        app:backgroundTint="@null"
+        android:textSize="22dp" />
+
+</LinearLayout>

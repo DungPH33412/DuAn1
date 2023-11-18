@@ -8,7 +8,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/ima"/>
+        android:src="@drawable/nike"
+        android:layout_marginTop="20dp"/>
 
     <LinearLayout
         android:layout_marginLeft="10dp"
@@ -20,10 +21,10 @@
             android:id="@+id/txttencongviec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tên công việc"
+            android:text="Sản phẩm mới"
             android:textColor="#E60909"
             android:textSize="26sp"
-            android:textStyle="italic"/>
+            android:textStyle="bold"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -34,7 +35,7 @@
                 android:id="@+id/txtcontent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Content"
+                android:text="Nike Air Force 1"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -43,7 +44,7 @@
                 android:id="@+id/txtstatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Status"
+                android:text="500.000 VND"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"/>

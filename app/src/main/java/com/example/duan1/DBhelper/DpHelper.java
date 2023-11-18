@@ -27,8 +27,8 @@ public class DpHelper extends SQLiteOpenHelper {
         String dNguoiDung = "INSERT INTO NGUOIDUNG VALUES('Dung','123','Nguyen Trung Dung')," +
                 "('Giap','699','Do Quang Giap')";
        db.execSQL(dNguoiDung);
-        String dCongViec = "INSERT INTO CONGVIEC VALUES(1,'Thiết kế','Thiết kế trang web','Đang làm')," +
-                "(2,'Lập trình','Lập trình android','Đã hoàn thành')";
+        String dCongViec = "INSERT INTO CONGVIEC VALUES(1,'Sản phẩm mới','Nike AirForce 1','500.000VND')," +
+                "(2,'Sản phẩm mới','Nike','1.000.000 VND')";
        db.execSQL(dCongViec);
     }
 

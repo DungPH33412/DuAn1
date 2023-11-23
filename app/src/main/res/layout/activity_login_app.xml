@@ -10,9 +10,9 @@
     android:layout_margin="10dp">
     <ImageView
         android:id="@+id/imglogo"
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:background="@drawable/logo"
+        android:layout_width="300dp"
+        android:layout_height="280dp"
+        android:background="@drawable/shoes"
         android:layout_margin="10dp"
         />
     <TextView

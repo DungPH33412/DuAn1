@@ -2,14 +2,30 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_quanly"
-            android:title="Quản Lý"
+            android:title="Sản phẩm"
             android:icon="@drawable/sanpham"></item>
         <item android:id="@+id/nav_gioithieu"
-            android:title="Giới Thiệu"
+            android:title="Chi tiết sản phẩm"
             android:icon="@drawable/gioithieu"></item>
+        <item
+            android:id="@+id/nav_giohang"
+            android:title="Giỏ hàng"
+            android:icon="@drawable/baseline_cart_24"></item>
+        <item
+            android:id="@+id/nav_quanlysanpham"
+            android:title="Quản lý sản phẩm"
+            android:icon="@drawable/baseline_dehaze_24"></item>
+        <item
+            android:id="@+id/nav_doanhthu"
+            android:title="Doanh thu"
+            android:icon="@drawable/baseline_bar_chart_24"></item>
     </group>
     <item android:title="Khác">
         <menu>
+            <item
+                android:id="@+id/nav_themnguoidung"
+                android:title="Thêm người dùng"
+                android:icon="@drawable/baseline_person_add_24"></item>
             <item android:id="@+id/nav_caidat"
                 android:title="Cài Đặt"
                 android:icon="@drawable/caidat"></item>

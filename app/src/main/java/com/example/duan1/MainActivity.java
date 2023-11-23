@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar= findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigationView);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Quản Lý Công Việc");
+        getSupportActionBar().setTitle("Sản phẩm");
         drawerLayout = findViewById(R.id.drawerLayout);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.baseline_dehaze_24);

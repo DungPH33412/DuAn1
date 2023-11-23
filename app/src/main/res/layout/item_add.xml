@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:text="THÊM CÔNG VIỆC"
+        android:text="THÊM SẢN PHẨM"
         android:textColor="#D10606"
         android:textAllCaps="true"
         android:textSize="30sp"
@@ -19,7 +19,7 @@
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Tên công việc: "
+    android:text="Tên sản phẩm: "
     android:textAllCaps="true"
     android:textColor="#000"
     android:textStyle="bold"
@@ -33,12 +33,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/custom_edit"
-        android:hint="Nhập tên công việc"
+        android:hint="Nhập sản phẩm"
         android:textSize="22sp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Content: "
+        android:text="Đơn giá: "
         android:textAllCaps="true"
         android:textColor="#000"
         android:textStyle="bold"
@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:hint="Nhập mô tả công việc"
+        android:hint="Nhập đơn giá"
         android:background="@drawable/custom_edit"
         android:textSize="22sp" />
     <TextView
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/custom_edit"
-        android:hint="Nhập trạng thái"
+        android:hint="Nhập trạng thái:"
         android:textSize="22sp" />
 
 

@@ -1,7 +1,5 @@
 package com.example.duan1.Adapter;
 
-import static com.google.android.gms.common.api.internal.LifecycleCallback.getFragment;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,21 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.bumptech.glide.Glide;
-
-import java.util.List;
-
 import com.example.duan1.Fragment.Admin.AddBrandFragment;
 import com.example.duan1.Fragment.ListProductFragment;
 import com.example.duan1.Model.Brand;
+
 import com.example.duan1.R;
 import com.example.duan1.Screen.HomeActivity;
 import com.example.duan1.databinding.ItemBrandBinding;
+
+import java.util.List;
+
 
 public class AdapterBrand extends RecyclerView.Adapter<AdapterBrand.ViewHolder>{
 

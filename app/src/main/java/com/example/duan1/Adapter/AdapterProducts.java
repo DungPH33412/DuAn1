@@ -12,13 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
-
-import java.util.List;
-
 import com.example.duan1.Fragment.Admin.AddProductFragment;
 import com.example.duan1.Fragment.DetailFragment;
-import com.example.duan1.Model.Brand;
+import com.squareup.picasso.Picasso;
+
+import java.io.Serializable;
+import java.util.List;
+
 import com.example.duan1.Model.Product;
 import com.example.duan1.R;
 import com.example.duan1.Screen.HomeActivity;

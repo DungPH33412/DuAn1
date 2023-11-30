@@ -2,7 +2,7 @@ package com.example.duan1.Model;
 
 import java.io.Serializable;
 
-public class Brand  implements Serializable {
+public class Brand implements Serializable {
     private String id;
     private String name;
     private String image;

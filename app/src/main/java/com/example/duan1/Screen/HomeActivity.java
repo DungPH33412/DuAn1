@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 
+import com.example.duan1.Fragment.Home.CartFragment;
+import com.example.duan1.Fragment.Home.ExploreFragment;
+import com.example.duan1.Fragment.Home.HistoryFragment;
 import com.example.duan1.R;
 import com.example.duan1.databinding.ActivityHomeBinding;
 

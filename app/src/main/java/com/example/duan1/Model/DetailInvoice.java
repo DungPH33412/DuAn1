@@ -1,15 +1,15 @@
 package com.example.duan1.Model;
 
-public class Detailnvoice {
+public class DetailInvoice {
     private String idKey;
     private String idProduct;
     private String idInvoice;
     private String quantityProduct;
 
-    public Detailnvoice() {
+    public DetailInvoice() {
     }
 
-    public Detailnvoice(String idKey, String idProduct, String idInvoice, String quantityProduct) {
+    public DetailInvoice(String idKey, String idProduct, String idInvoice, String quantityProduct) {
         this.idKey = idKey;
         this.idProduct = idProduct;
         this.idInvoice = idInvoice;

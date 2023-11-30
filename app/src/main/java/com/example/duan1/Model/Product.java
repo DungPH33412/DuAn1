@@ -1,6 +1,8 @@
 package com.example.duan1.Model;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private String idKey;
     private String name;
     private String price;

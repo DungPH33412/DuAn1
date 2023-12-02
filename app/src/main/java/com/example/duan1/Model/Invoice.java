@@ -7,17 +7,27 @@ public class Invoice {
     private String address;
     private String email;
     private String date;
+    private int status;
 
     public Invoice() {
     }
 
-    public Invoice(String idKey, String idUser, String total, String address, String email, String date) {
+    public Invoice(String idKey, String idUser, String total, String address, String email, String date, int status) {
         this.idKey = idKey;
         this.idUser = idUser;
         this.total = total;
         this.address = address;
         this.email = email;
         this.date = date;
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getIdKey() {

@@ -47,4 +47,6 @@ public class DetailInvoice {
     public void setQuantityProduct(String quantityProduct) {
         this.quantityProduct = quantityProduct;
     }
+
+
 }

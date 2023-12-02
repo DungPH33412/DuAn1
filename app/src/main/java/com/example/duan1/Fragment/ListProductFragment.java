@@ -51,7 +51,7 @@ public class ListProductFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        //PHÂN QUYỀN TRUY CẬP CỦA ADMIN
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("dataLogin", getActivity().MODE_PRIVATE);
         String role = sharedPreferences.getString("role", "");
         if(role.equals("admin")){

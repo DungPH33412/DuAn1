@@ -4,20 +4,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
-import com.example.duan1.Adapter.AdapterBrand;
-import com.example.duan1.Adapter.AdapterProducts;
-import com.example.duan1.Fragment.Admin.AddBrandFragment;
-import com.example.duan1.Model.Brand;
-import com.example.duan1.Model.Product;
-import com.example.duan1.R;
-import com.example.duan1.databinding.FragmentExploreBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,8 +23,17 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.duan1.Adapter.AdapterBrand;
+import com.example.duan1.Adapter.AdapterProducts;
+import com.example.duan1.Fragment.Admin.AddBrandFragment;
+import com.example.duan1.Model.Brand;
+import com.example.duan1.Model.Product;
+import com.example.duan1.R;
+import com.example.duan1.databinding.FragmentExploreBinding;
+
 
 public class ExploreFragment extends Fragment {
+
 
     FragmentExploreBinding binding;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -38,7 +43,6 @@ public class ExploreFragment extends Fragment {
     public ExploreFragment() {
         // Required empty public constructor
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,16 +51,16 @@ public class ExploreFragment extends Fragment {
         return binding.getRoot();
     }
 
-
     @Override
-    public void onViewCreated(@NonNull View view, @NonNull Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("dataLogin", getActivity().MODE_PRIVATE);
-        //Chức năng phân quyền cho ADMIN
         String role = sharedPreferences.getString("role", "");
-        if (role.equals("admin")){
+        if(role.equals("admin")){
             binding.imageButtonAddBrand.setVisibility(View.VISIBLE);
         }
+
         binding.textView2.setText(sharedPreferences.getString("name", ""));
 
         binding.imageButtonAddBrand.setOnClickListener(v -> {
@@ -66,9 +70,9 @@ public class ExploreFragment extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     List<Brand> brandList = new ArrayList<>();
-                    for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         Brand brand = snapshot1.getValue(Brand.class);
                         brandList.add(brand);
                     }
@@ -86,9 +90,9 @@ public class ExploreFragment extends Fragment {
         myRef2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     List<Product> productList = new ArrayList<>();
-                    for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         Product product = snapshot1.getValue(Product.class);
                         productList.add(product);
                     }
@@ -104,7 +108,8 @@ public class ExploreFragment extends Fragment {
         });
     }
 
-    private void getFragment(Fragment fragment){
+
+    private void getFragment(Fragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainerView, fragment);
         transaction.commit();

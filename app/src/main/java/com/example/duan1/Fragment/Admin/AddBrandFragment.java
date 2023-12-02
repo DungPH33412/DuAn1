@@ -12,6 +12,7 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -22,10 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.duan1.Fragment.Home.ExploreFragment;
-import com.example.duan1.Model.Brand;
-import com.example.duan1.R;
-import com.example.duan1.databinding.FragmentAddBrandBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -45,6 +42,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import com.example.duan1.Fragment.Home.ExploreFragment;
+import com.example.duan1.Model.Brand;
+import com.example.duan1.R;
+import com.example.duan1.databinding.FragmentAddBrandBinding;
 
 public class AddBrandFragment extends Fragment {
 
@@ -54,10 +55,10 @@ public class AddBrandFragment extends Fragment {
     private DatabaseReference myRef = database.getReference("Brand");
     private String status = "add";
     private Brand brand = new Brand();
-
     public AddBrandFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,10 +67,12 @@ public class AddBrandFragment extends Fragment {
         binding = FragmentAddBrandBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
+
+
     @Override
-    public void onViewCreated(@NonNull View view, @NonNull Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (getArguments() != null){
+        if(getArguments() != null) {
             status = getArguments().getString("status");
             brand = (Brand) getArguments().getSerializable("brand");
             if (status.equals("edit")) {
@@ -79,6 +82,7 @@ public class AddBrandFragment extends Fragment {
                 Picasso.get().load(brand.getImage()).into(binding.brandImage);
             }
         }
+
         binding.cancelBtn.setOnClickListener(v -> {
             getFragment(new ExploreFragment());
         });
@@ -91,16 +95,16 @@ public class AddBrandFragment extends Fragment {
                     .setOkButton("Xóa")
                     .setOkButtonClickListener((dialog, v1) ->{
                         for (int i = 2; i <= 10; i++) {
-                            WaitDialog.show(getActivity(), "Đang xóa...", i/10f);
+                            WaitDialog.show(getActivity(),"Đang xóa...",i/10f);
                         }
                         myRef.child(brand.getId()).removeValue().addOnCompleteListener(task -> {
-                            if (task.isSuccessful()){
+                            if(task.isSuccessful()){
                                 WaitDialog.dismiss();
-                                TipDialog.show(getActivity(), "Xóa thành công", TipDialog.TYPE.SUCCESS);
+                                TipDialog.show(getActivity(),"Xóa thành công", TipDialog.TYPE.SUCCESS);
                                 getFragment(new ExploreFragment());
-                            }else {
+                            }else{
                                 WaitDialog.dismiss();
-                                TipDialog.show(getActivity(), "Xóa thất bại", TipDialog.TYPE.ERROR);
+                                TipDialog.show(getActivity(),"Xóa thất bại", TipDialog.TYPE.ERROR);
                             }
                         });
                         return false;
@@ -110,75 +114,82 @@ public class AddBrandFragment extends Fragment {
 
         binding.brandImage.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             pickImage.launch(intent);
         });
 
+
         binding.addBrandBtn.setOnClickListener(v -> {
             String nameBrand = binding.brandName.getText().toString();
-            if (nameBrand.isEmpty()){
-                TipDialog.show(getActivity(), "Vui lòng nhập tên thương hiệu", TipDialog.TYPE.ERROR);
-            } else if (!check && status.equals("add")) {
-                TipDialog.show(getActivity(), "Vui lòng chọn ảnh thương hiệu", TipDialog.TYPE.ERROR);
-            } else {
+            if(nameBrand.isEmpty()){
+                TipDialog.show(getActivity(),"Vui lòng nhập tên thương hiệu", TipDialog.TYPE.ERROR);
+            }else if(!check && status.equals("add")){
+                TipDialog.show(getActivity(),"Vui lòng chọn ảnh thương hiệu", TipDialog.TYPE.ERROR);
+            }else{
                 Query query = myRef.orderByChild("name").equalTo(nameBrand);
                 query.get().addOnCompleteListener(task -> {
-                    if (task.isSuccessful()){
-                        if (task.getResult().getChildrenCount() > 0){
+                    if(task.isSuccessful()){
+                        if(task.getResult().getChildrenCount() > 0){
                             TipDialog.show(getActivity(),"Tên thương hiệu đã tồn tại", TipDialog.TYPE.ERROR);
-                        }else {
+                        }else{
                             uploadImage(nameBrand);
                         }
-                    }else {
+                    }else{
                         uploadImage(nameBrand);
                     }
                 });
             }
         });
     }
-        public void uploadImage(String nameBrand){
-            WaitDialog.show(getActivity(), "Đang tải...", 0.1f);
-            String filepath = "images/"+System.currentTimeMillis();
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference(filepath);
-            storageReference.putBytes(getByteArrayFromImageView(binding.brandImage))
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            for (int i = 2; i <= 10; i++){
-                                WaitDialog.show(getActivity(), "Đang tải...", i/10f);
-                            }
-                            Log.d("Upload", "onSuccess");
-                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                            while (!uriTask.isSuccessful());
-                            if (!status.equals("edit")){
-                                brand.setId(myRef.push().getKey());
-                            }
-                            brand.setName(nameBrand);
-                            brand.setImage(uriTask.getResult().toString());
-                            myRef.child(brand.getId()).setValue(brand).addOnCompleteListener(task ->{
-                                if (task.isSuccessful()){
-                                    WaitDialog.dismiss();
-                                    if (!status.equals("edit")){
-                                        binding.brandImage.setImageResource(R.drawable.icons8_add_image_96);
-                                        binding.brandName.setText("");
-                                        check = false;
-                                        TipDialog.show(getActivity(), "Thêm thành công", WaitDialog.TYPE.SUCCESS);
-                                    }else {
-                                        TipDialog.show(getActivity(), "Sửa thành công", TipDialog.TYPE.SUCCESS);
-                                    }
-                                }else {
-                                    WaitDialog.dismiss();
-                                    TipDialog.show(getActivity(), "Thêm thất bại", TipDialog.TYPE.SUCCESS);
-                                }
-                            });
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
 
+
+    public void uploadImage(String nameBrand){
+        WaitDialog.show(getActivity(),"Đang tải...",0.1f);
+        String filepath = "images/"+System.currentTimeMillis();
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(filepath);
+        storageReference.putBytes(getByteArrayFromImageView(binding.brandImage))
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        for (int i = 2; i <= 10; i++) {
+                            WaitDialog.show(getActivity(),"Đang tải...",i/10f);
                         }
-                    });
-        }
+                        Log.d("Upload","onSuccess");
+                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                        while (!uriTask.isSuccessful());
+                        if(!status.equals("edit")){
+                            brand.setId(myRef.push().getKey());
+                        }
+                        brand.setName(nameBrand);
+                        brand.setImage(uriTask.getResult().toString());
+                        myRef.child(brand.getId()).setValue(brand).addOnCompleteListener(task -> {
+                            if(task.isSuccessful()){
+                                WaitDialog.dismiss();
+                                if(!status.equals("edit")) {
+                                    binding.brandImage.setImageResource(R.drawable.icons8_add_image_96);
+                                    binding.brandName.setText("");
+                                    check = false;
+                                    TipDialog.show(getActivity(),"Thêm thành công", TipDialog.TYPE.SUCCESS);
+
+                                }else{
+                                    TipDialog.show(getActivity(),"Sửa thành công", TipDialog.TYPE.SUCCESS);
+
+                                }
+                            }else{
+                                WaitDialog.dismiss();
+                                TipDialog.show(getActivity(),"Thêm thất bại", TipDialog.TYPE.ERROR);
+                            }
+                        });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+    }
+
     public byte[] getByteArrayFromImageView(ImageView imageView){
         BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
@@ -187,6 +198,7 @@ public class AddBrandFragment extends Fragment {
         byte[] byteArray = stream.toByteArray();
         return byteArray;
     }
+
     private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -205,7 +217,8 @@ public class AddBrandFragment extends Fragment {
                 }
             }
     );
-    private void getFragment(Fragment fragment){
+
+    private void getFragment(Fragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainerView, fragment);
         transaction.commit();

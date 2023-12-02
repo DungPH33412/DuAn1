@@ -82,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                                 WaitDialog.dismiss();
                                 sharedPreferences.edit().putString("email",email).apply();
                                 sharedPreferences.edit().putString("name",dataSnapshot1.child("name").getValue().toString()).apply();
+                                //phân quyền
                                 sharedPreferences.edit().putString("role",dataSnapshot1.child("role").getValue().toString()).apply();
                                 sharedPreferences.edit().putString("key",dataSnapshot1.getKey()).apply();
                                 TipDialog.show(LoginActivity.this,"Login success", TipDialog.TYPE.SUCCESS);

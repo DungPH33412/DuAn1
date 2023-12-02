@@ -7,16 +7,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.duan1.Adapter.AdapterCart;
-import com.example.duan1.Model.Cart;
-import com.example.duan1.Model.DetailInvoice;
-import com.example.duan1.Model.Invoice;
-import com.example.duan1.R;
-import com.example.duan1.databinding.FragmentCartBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +25,13 @@ import com.kongzue.dialogx.dialogs.WaitDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.duan1.Adapter.AdapterCart;
+import com.example.duan1.Model.Cart;
+import com.example.duan1.Model.DetailInvoice;
+import com.example.duan1.Model.Invoice;
+import com.example.duan1.R;
+import com.example.duan1.databinding.FragmentCartBinding;
 
 
 public class CartFragment extends Fragment {
@@ -154,6 +156,7 @@ public class CartFragment extends Fragment {
                                     invoice.setEmail(sharedPreferences.getString("email", ""));
                                     invoice.setIdKey(database.getReference("Invoice").push().getKey());
                                     invoice.setDate(String.valueOf(System.currentTimeMillis()));
+                                    invoice.setStatus(0);
                                     database.getReference("Invoice").child(invoice.getIdKey()).setValue(invoice);
                                     for (int i = 0; i < cartList.size(); i++) {
                                         DetailInvoice detailInvoice = new DetailInvoice();
